@@ -5,14 +5,16 @@ import (
 	"os"
 	"time"
 
+	"github.com/cilginc/webserver-go/internal/config"
 	"github.com/cilginc/webserver-go/internal/logging"
 	"github.com/cilginc/webserver-go/internal/server"
 )
 
 func main() {
-	addr := flag.String("listen", ":8080", "listen address")
-	root := flag.String("root", "./www", "static root dir")
-	workers := flag.Int("workers", 8, "number of worker goroutines")
+	cfg := config.Load()
+	addr := flag.String("listen", cfg.Port, "listen address")
+	root := flag.String("root", cfg.StaticDir, "static root dir")
+	workers := flag.Int("workers", cfg.WorkerCount, "number of worker goroutines")
 	flag.Parse()
 
 	logger := logging.NewStdLogger()
