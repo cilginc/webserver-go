@@ -13,7 +13,7 @@ type Config struct {
 }
 
 func Load() *Config {
-	port := getEnv("PORT", "8080")
+	port := getEnv("PORT", ":8080")
 	staticDir := getEnv("STATIC_DIR", ".")
 
 	workerCount := runtime.NumCPU()
